@@ -3,8 +3,7 @@ import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 
 import "./App.css";
-import LoginComponent from "./app/components/LoginComponent";
-import SignupComponent from "./app/components/SignupComponent";
+import AuthComponent from "./app/components/auth/AuthComponent";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,8 +17,8 @@ function App() {
 
   return (
     <>
-      {/* <LoginComponent></LoginComponent> */}
-      <SignupComponent></SignupComponent>
+      <div className="text-xl font-bold text-red">test div</div>
+      <AuthComponent></AuthComponent>
       {/* <h1>Welcome {decodedJwt.firstName ? decodedJwt.firstName : "Guest"} </h1> */}
     </>
   );

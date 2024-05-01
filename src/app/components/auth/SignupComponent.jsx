@@ -81,7 +81,7 @@ const SignupComponent = () => {
         </div>
         <div>
           <PhoneInput
-            defaultCountry="ua"
+            defaultCountry="fr"
             value={input.phoneNumber}
             name="phoneNumber"
             onChange={(phone, country) => handlePhoneChange(phone, country)}
