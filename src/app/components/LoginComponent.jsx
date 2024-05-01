@@ -53,6 +53,7 @@ const LoginComponent = () => {
 
   return (
     <>
+      <p>Login</p>
       <form onSubmit={handleLoginEvent}>
         <div>
           <input
