@@ -14,7 +14,6 @@ const LoginComponent = () => {
 
   const handleLoginEvent = (e) => {
     e.preventDefault();
-    console.log(JSON.stringify(input));
 
     fetch("http://localhost:3000/auth/login", {
       method: "POST",
@@ -33,7 +32,6 @@ const LoginComponent = () => {
       })
       .then((data) => {
         const decodedJwt = jwtDecode(data.jwt);
-        console.log(decodedJwt);
 
         cookies.set("jwt_authorization", data.jwt, {
           expires: new Date(decodedJwt.exp * 1000),
@@ -53,30 +51,38 @@ const LoginComponent = () => {
 
   return (
     <>
-      <p>Login</p>
-      <form onSubmit={handleLoginEvent}>
+      <div className="text-left p-5">
+        <h2 className="font-bold text-2xl uppercase pb-2 text-white text-center">
+          Log in
+        </h2>
         <div>
-          <input
-            type="email"
-            id="user-email"
-            name="email"
-            placeholder="example@yahoo.com"
-            onChange={handleInput}
-          />
+          <form
+            onSubmit={handleLoginEvent}
+            className="flex flex-col gap-2 items-center"
+          >
+            <input
+              className="aloom-text-input"
+              type="email"
+              id="user-email"
+              name="email"
+              placeholder="Email"
+              onChange={handleInput}
+            />
+            <input
+              className="aloom-text-input"
+              type="password"
+              id="current-password"
+              name="password"
+              placeholder="Password"
+              onChange={handleInput}
+            />
+            <div>
+              <button>Submit</button>
+            </div>
+          </form>
         </div>
-        <div>
-          <input
-            type="password"
-            id="current-password"
-            name="password"
-            placeholder="******"
-            onChange={handleInput}
-          />
-        </div>
-        <div>
-          <button>Submit</button>
-        </div>
-      </form>
+        <span className="cursor-pointer underline">forgot your password ?</span>
+      </div>
     </>
   );
 };

@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}
+
+/* custom component styles  */
+
+.aloom-text-input {
+  color: #282828;
+  width: 400px;
+  border-radius: 10px;
+  padding: 8px 15px;
+}
+
+/* no options to custom the phone input so adding more css, not ideal but does the trick for now */
+/* https://react-international-phone.vercel.app/docs/getting-started */
+.aloom-react-international-phone-input {
+  .react-international-phone-country-selector-button {
+    border-radius: 10px 0px 0px 10px;
+    padding: 18px 15px;
+  }
+
+  .react-international-phone-input {
+    border-radius: 0px 10px 10px 0px;
+    padding: 18px 15px;
+    font-size: 14;
+    width: 325px;
+    color: #282828;
+  }
+}
