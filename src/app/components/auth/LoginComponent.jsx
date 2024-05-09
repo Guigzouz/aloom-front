@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Cookies } from "react-cookie";
-import Button from "@mui/material/Button";
 
 const LoginComponent = () => {
   const cookies = new Cookies();
@@ -78,19 +77,9 @@ const LoginComponent = () => {
               onChange={handleInput}
             />
             <div className="w-[400px]">
-              <Button
-                variant="contained"
-                className="w-full"
-                style={{
-                  backgroundColor: "#282828",
-                  borderRadius: "10px",
-                  fontWeight: 600,
-                  fontSize: 12,
-                  padding: 12,
-                }}
-              >
-                Next
-              </Button>
+              <button className="w-full bg-[#282828] rounded-lg font-semibold text-white text-base px-3 py-3">
+                NEXT
+              </button>
             </div>
           </form>
         </div>
