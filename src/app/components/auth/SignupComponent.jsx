@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
+import Button from "@mui/material/Button";
 
 const SignupComponent = () => {
   const [input, setInput] = useState({
@@ -83,8 +84,20 @@ const SignupComponent = () => {
             name="phoneNumber"
             onChange={(phone, country) => handlePhoneChange(phone, country)}
           />
-          <div>
-            <button>Submit</button>
+          <div className="w-[400px]">
+            <Button
+              variant="contained"
+              className="w-full"
+              style={{
+                backgroundColor: "#282828",
+                borderRadius: "10px",
+                fontWeight: 600,
+                fontSize: 12,
+                padding: 12,
+              }}
+            >
+              Next
+            </Button>
           </div>
         </form>
       </div>

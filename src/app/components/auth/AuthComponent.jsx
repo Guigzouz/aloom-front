@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LoginComponent from "./LoginComponent";
 import SignupComponent from "./SignupComponent";
+import CloseIcon from "@mui/icons-material/Close";
 
 const AuthComponent = () => {
   const [hasAccount, setHasAccount] = useState(true);
@@ -10,7 +11,7 @@ const AuthComponent = () => {
   };
   return (
     <>
-      <section className="grid grid-cols-2 bg-aloom-orange rounded-2xl h-[32rem]">
+      <section className="grid grid-cols-2 bg-aloom-orange rounded-2xl h-[34rem]">
         {/*todo :  if time is sufficient, try to make a roll between different images  */}
         <div className="bg-lol-jhin bg-center rounded-l-2xl text-left flex flex-col justify-between">
           <h1 className="text-white uppercase font-bold w-56 p-5">
@@ -22,7 +23,13 @@ const AuthComponent = () => {
           </p>
         </div>
 
-        <div className="p-5">
+        <div className="p-3">
+          <div className="w-full text-right">
+            <CloseIcon
+              style={{ color: "white", fontSize: 40 }}
+              className="cursor-pointer"
+            />
+          </div>
           <div className="flex justify-center">
             <img src="src/assets/aloom-logo-text.png" />
           </div>
@@ -31,7 +38,7 @@ const AuthComponent = () => {
           <div>
             <span
               onClick={handleAuthMethod}
-              className="cursor-pointer underline"
+              className="cursor-pointer underline  hover:text-white"
             >
               {hasAccount == true
                 ? "no account yet ? signup here"
