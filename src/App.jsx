@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 
 import "./App.css";
-import AuthComponent from "./app/components/auth/AuthComponent";
+import ToolbarComponent from "./app/components/navigation/ToolbarComponent";
 
 function App() {
   const [cookies] = useCookies(["jwt_authorization"]);
@@ -15,7 +14,7 @@ function App() {
 
   return (
     <>
-      <AuthComponent></AuthComponent>
+      <ToolbarComponent></ToolbarComponent>
     </>
   );
 }

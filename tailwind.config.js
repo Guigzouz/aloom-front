@@ -5,11 +5,13 @@ export default {
     colors: {
       white: "white",
       "aloom-bg-dark": "#282828",
+      "aloom-bg-dark-second": "#1E1E1E",
       "aloom-orange": "#FF521B",
     },
     extend: {
       backgroundImage: {
         "lol-jhin": "url('src/assets/jhin_0.jpg')",
+        "elden-ring": "url('src/assets/elden-ring.avif')",
       },
     },
   },

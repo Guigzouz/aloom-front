@@ -9,6 +9,9 @@
   h2 {
     @apply text-xl;
   }
+  body {
+    @apply bg-aloom-bg-dark;
+  }
 }
 
 /* custom component styles  */
@@ -34,5 +37,22 @@
     font-size: 14;
     width: 325px;
     color: #282828;
+  }
+}
+
+.diagonal-gradient {
+  background: linear-gradient(-50deg, #ff521b, #c94016, #ff521b);
+  background-size: 400% 400%;
+  animation: gradient 3s ease infinite;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
