@@ -1,18 +1,4 @@
-import { useState, useContext } from "react";
-import AuthComponent from "../auth/AuthComponent";
-import LoginIcon from "@mui/icons-material/Login";
-
 const ToolbarComponent = () => {
-  const [isAuthActive, setIsAuthActive] = useState(false);
-
-  const handleAuthentification = () => {
-    setIsAuthActive(true);
-  };
-
-  const handleAuthClose = () => {
-    setIsAuthActive(false);
-  };
-
   return (
     <>
       <section className="aloom-main-toolbar bg-aloom-bg-dark-second h-full w-24 rounded-3xl">
@@ -21,17 +7,8 @@ const ToolbarComponent = () => {
           <div>
             <img src="src/assets/aloom-panda.png" />
           </div>
-          <LoginIcon
-            className="cursor-pointer"
-            sx={{ fontSize: 36, color: "white" }}
-            onClick={handleAuthentification}
-          ></LoginIcon>
         </div>
       </section>
-
-      {isAuthActive && (
-        <AuthComponent onClose={handleAuthClose}></AuthComponent>
-      )}
     </>
   );
 };

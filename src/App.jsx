@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 import "./App.css";
 import ToolbarComponent from "./app/components/navigation/ToolbarComponent";
 import { socket } from "./socket";
+import PrivateMessagesComponent from "./app/components/navigation/PrivateMessagesComponent";
 // import ConnectionState from "./app/components/ConnectionState";
 // import Events from "./app/components/Events";
 // import ConnectionManager from "./app/components/ConnectionManager";
@@ -49,10 +50,12 @@ function App() {
       <MyForm /> */}
 
       {userProfile ? (
+        // eslint-disable-next-line react/no-unescaped-entities
         <h3 className="text-white">How's it going, {userProfile.firstName}?</h3>
       ) : (
         <h3 className="text-white">Welcome! please log in</h3>
       )}
+      <PrivateMessagesComponent />
     </UserProfileContext.Provider>
   );
 }
