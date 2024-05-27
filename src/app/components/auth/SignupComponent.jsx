@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PhoneInput } from "react-international-phone";
+import { handleSignupEvent } from "../../data-access-layer/auth-access-object";
 import "react-international-phone/style.css";
 
 const SignupComponent = () => {
@@ -8,7 +9,7 @@ const SignupComponent = () => {
     lastName: "",
     email: "",
     password: "",
-    phoneNumber: "",
+    phoneNumber: 0,
     countryKey: "",
   });
 
@@ -23,15 +24,29 @@ const SignupComponent = () => {
 
   //custom handler because of library specifications
   const handlePhoneChange = (phone, country) => {
-    setInput((prev) => ({
-      ...prev,
-      phoneNumber: phone,
-      countryKey: country.alpha2,
-    }));
+    console.log(phone, country);
+    if (country) {
+      setInput((prev) => ({
+        ...prev,
+        countryKey: country.country.iso2,
+        phoneNumber: phone,
+      }));
+    } else {
+      console.error("Country is undefined");
+    }
+
+    console.log(input);
   };
 
-  const handleSignupEvent = (e) => {
-    e.preventDefault;
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    try {
+      await handleSignupEvent(input);
+      // Optionally handle any additional logic here after successful login
+    } catch (error) {
+      // Handle the error if needed
+    }
   };
 
   return (
@@ -41,7 +56,7 @@ const SignupComponent = () => {
           Sign up
         </h2>
         <form
-          onSubmit={handleSignupEvent}
+          onSubmit={handleSignup}
           className="flex flex-col gap-2 items-center"
         >
           <input

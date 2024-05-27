@@ -1,43 +1,21 @@
 import { useState } from "react";
-import { jwtDecode } from "jwt-decode";
-import { Cookies } from "react-cookie";
+import { handleLoginEvent } from "../../data-access-layer/auth-access-object";
 
 const LoginComponent = () => {
-  const cookies = new Cookies();
-
-  // Need to set the user globally, zustand ?
-
   const [input, setInput] = useState({
     email: "",
     password: "",
   });
 
-  const handleLoginEvent = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "cors",
-      body: JSON.stringify(input),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        // Return the response body as JSON
-        return res.json();
-      })
-      .then((data) => {
-        const decodedJwt = jwtDecode(data.jwt);
-
-        cookies.set("jwt_authorization", data.jwt, {
-          expires: new Date(decodedJwt.exp * 1000),
-        });
-      })
-      .catch((error) => console.error("Error:", error));
+    try {
+      await handleLoginEvent(input);
+      // Optionally handle any additional logic here after successful login
+    } catch (error) {
+      // Handle the error if needed
+    }
   };
 
   const handleInput = (e) => {
@@ -57,7 +35,7 @@ const LoginComponent = () => {
         </h2>
         <div>
           <form
-            onSubmit={handleLoginEvent}
+            onSubmit={handleLogin}
             className="flex flex-col gap-2 items-center"
           >
             <input

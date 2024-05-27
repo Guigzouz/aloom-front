@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import CloseIcon from "@mui/icons-material/Close";
+
 import AuthComponent from "../auth/AuthComponent";
 
 const PrivateMessagesComponent = () => {
@@ -24,27 +26,40 @@ const PrivateMessagesComponent = () => {
     <>
       <section className="relative flex flex-col justify-between">
         <div
-          className={`chatbox p-5 rounded-3xl bg-aloom-bg-dark-second cursor-pointer transition-all duration-300 ${
+          className={`chatbox p-5 rounded-3xl bg-aloom-bg-dark-second transition-all duration-300 ${
             isChatExpanded ? "w-24 h-[14rem]" : "w-24 h-[49rem]"
           }  `}
         >
           <AccountCircleIcon
             sx={{ fontSize: 48, color: "white" }}
+            className="cursor-pointer "
             onClick={handleAuthentification}
           ></AccountCircleIcon>
         </div>
 
         <div
-          className={`chatbox p-5 rounded-3xl bg-aloom-bg-dark-second cursor-pointer transition-all duration-300 ${
+          className={`chatbox p-5 rounded-3xl bg-aloom-bg-dark-second  transition-all duration-300 ${
             isChatExpanded
               ? "w-96 h-[41rem]"
               : "w-24 h-24  flex items-center justify-center"
           } absolute bottom-0 right-0`}
-          onClick={handleChatDisplay}
         >
-          {isChatExpanded ? null : (
+          {isChatExpanded ? (
+            <div>
+              <div className="w-full text-right">
+                <CloseIcon
+                  style={{ color: "white", fontSize: 40 }}
+                  className="cursor-pointer"
+                  onClick={handleChatDisplay}
+                />
+              </div>
+              <div>FRIEND LIST COMPONENT</div>
+            </div>
+          ) : (
             <QuestionAnswerIcon
               sx={{ fontSize: 36, color: "white" }}
+              onClick={handleChatDisplay}
+              className="cursor-pointer "
             ></QuestionAnswerIcon>
           )}
         </div>
