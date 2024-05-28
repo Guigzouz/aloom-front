@@ -5,6 +5,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CloseIcon from "@mui/icons-material/Close";
 
 import AuthComponent from "../auth/AuthComponent";
+import FriendListComponent from "../FriendListComponent";
 
 const PrivateMessagesComponent = () => {
   const [isAuthActive, setIsAuthActive] = useState(false);
@@ -53,7 +54,7 @@ const PrivateMessagesComponent = () => {
                   onClick={handleChatDisplay}
                 />
               </div>
-              <div>FRIEND LIST COMPONENT</div>
+              <FriendListComponent></FriendListComponent>
             </div>
           ) : (
             <QuestionAnswerIcon
