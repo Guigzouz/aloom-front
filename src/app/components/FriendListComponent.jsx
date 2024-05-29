@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode"; // Ensure this is a default import if jwt-decode exports it as default
+import { jwtDecode } from "jwt-decode";
 import { useCookies } from "react-cookie";
 
 import { handleFriendListLoading } from "../data-access-layer/friends-access-object";
 import { handleUserRetrieveInformations } from "../data-access-layer/users-access-object";
 
-const FriendListComponent = () => {
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
+// eslint-disable-next-line react/prop-types
+const FriendListComponent = ({ onSwitchComponent, onSelectFriend }) => {
   const [cookies] = useCookies(["jwt_authorization"]);
   const [userId, setUserId] = useState(null);
   const [friendsList, setFriendsList] = useState([]);
@@ -63,17 +66,35 @@ const FriendListComponent = () => {
         <div>
           <ul>
             {detailedFriendsList.map((friend) => (
-              <li className="text-white" key={friend.userInformations.id}>
-                {friend.userInformations.firstName}
+              <li
+                className="text-white cursor-pointer flex items-center h-12 m-1 gap-5"
+                onClick={() => {
+                  onSelectFriend(friend);
+                  onSwitchComponent("ChatContainer");
+                }}
+                key={friend.userInformations.id}
+              >
+                {/* Need a filepath with img url for pfp */}
+                {friend.userInformations.filePath ? (
+                  <span>{friend.userInformations.filePath}</span>
+                ) : (
+                  <AccountCircleIcon
+                    sx={{ fontSize: 44, color: "white" }}
+                  ></AccountCircleIcon>
+                )}
+                <div className="friend-infos flex flex-col items-baseline">
+                  <span> {friend.userInformations.firstName}</span>
+                  <span className="text-sm italic">
+                    last online x minutes ago
+                  </span>
+                </div>
               </li>
             ))}
           </ul>
         </div>
       ) : (
         <div className="text-white">
-          <div className="lds-ring">
-            <div></div>
-            <div></div>
+          <div className="lds-ripple">
             <div></div>
             <div></div>
           </div>
