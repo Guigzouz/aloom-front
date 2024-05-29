@@ -49,7 +49,7 @@ const ChatContainerComponent = ({ onSwitchComponent, friend }) => {
 
   const handleSendMessage = (event) => {
     event.preventDefault();
-    if (!userId) return; // Exit if userId is not defined
+    if (!userId || !messageInput.trim()) return; // Exit if userId is not defined or message is empty
 
     const roomId = getRoomId(userId, friend.userInformations.id);
     const timestamp = new Date();
@@ -71,6 +71,11 @@ const ChatContainerComponent = ({ onSwitchComponent, friend }) => {
     return [userId, friendId].sort().join("-");
   }
 
+  const shouldShowTimestamp = (currentTimestamp, previousTimestamp) => {
+    if (!previousTimestamp) return true;
+    return dayjs(currentTimestamp).diff(dayjs(previousTimestamp), "hour") >= 1;
+  };
+
   return (
     <section className="chat-container h-[93%] p-2.5">
       <div className="chat-infos flex justify-between my-4">
@@ -90,28 +95,37 @@ const ChatContainerComponent = ({ onSwitchComponent, friend }) => {
         </div>
       </div>
       <div className="bg-aloom-bg-dark h-[90%] rounded-2xl flex flex-col justify-between">
-        <div className="messages-list max-h-full overflow-auto p-3">
-          {messages.map((msg, index) => (
-            <div
-              key={index}
-              className={`message-container flex flex-col mb-3 ${
-                msg.sender === userId ? "ml-auto" : ""
-              }`}
-            >
-              <div className="timestamp text-white text-xs mb-1">
-                {dayjs(msg.timestamp).format("HH:mm, DD MMM YYYY")}
-              </div>
+        <div className="messages-list p-3 max-h-full overflow-auto">
+          {messages.map((msg, index) => {
+            const previousMessage = messages[index - 1];
+            const showTimestamp = shouldShowTimestamp(
+              msg.timestamp,
+              previousMessage ? previousMessage.timestamp : null
+            );
+            return (
               <div
-                className={`message w-fit text-white rounded-lg p-2 ${
-                  msg.sender === userId
-                    ? "bg-aloom-orange self-end"
-                    : "bg-aloom-bg-dark-second self-start"
+                key={index}
+                className={`message-container flex flex-col mb-3 ${
+                  msg.sender === userId ? "ml-auto" : ""
                 }`}
               >
-                {msg.message}
+                {showTimestamp && (
+                  <div className="timestamp text-white text-xs mb-1">
+                    {dayjs(msg.timestamp).format("HH:mm, DD MMM YYYY")}
+                  </div>
+                )}
+                <div
+                  className={`message w-fit text-white rounded-lg p-2 ${
+                    msg.sender === userId
+                      ? "bg-aloom-orange self-end"
+                      : "bg-aloom-bg-dark-second self-start"
+                  }`}
+                >
+                  {msg.message}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <form onSubmit={handleSendMessage} className="flex items-end w-full">
           <textarea
