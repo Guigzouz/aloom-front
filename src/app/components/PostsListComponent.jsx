@@ -30,7 +30,7 @@ const PostsListComponent = () => {
 
   return (
     <>
-      <div className="post-list-container bg-aloom-bg-dark-second p-5 rounded-2xl flex flex-col justify-between w-auto">
+      <div className="post-list-container bg-aloom-bg-dark-second p-5 rounded-2xl flex flex-col justify-between w-1/2">
         <div className="max-h-[22rem] overflow-y-scroll">
           {postsList.length > 0 ? (
             postsList.map((post, index) => (

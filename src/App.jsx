@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import ToolbarComponent from "./app/components/navigation/ToolbarComponent";
 import { socket } from "./socket";
 import PrivateMessagesComponent from "./app/components/navigation/PrivateMessagesComponent";
 import PostsListComponent from "./app/components/PostsListComponent";
+import HomePage from "./app/components/navigation/HomePage";
+import PostsPage from "./app/components/navigation/PostsPage";
 // import ConnectionState from "./app/components/ConnectionState";
 // import Events from "./app/components/Events";
 // import ConnectionManager from "./app/components/ConnectionManager";
@@ -43,27 +46,40 @@ function App() {
   }, [cookies.jwt_authorization]);
 
   return (
-    <UserProfileContext.Provider value={userProfile}>
+    // <UserProfileContext.Provider value={userProfile}>
+    //   <ToolbarComponent />
+    //   {/* <ConnectionState />
+    //   <Events />
+    //   <ConnectionManager />
+    //   <MyForm /> */}
+    //   <section className="main-page-section  grid grid-rows-2">
+    //     {userProfile ? (
+    //       // eslint-disable-next-line react/no-unescaped-entities
+    //       <h3 className="text-white">
+    //         How's it going, {userProfile.firstName}?
+    //       </h3>
+    //     ) : (
+    //       <h3 className="text-white">Welcome! please log in</h3>
+    //     )}
+    //     <div className="flex gap-4 px-8">
+    //       <PostsListComponent />
+    //     </div>
+    //   </section>
+    //   <PrivateMessagesComponent />
+    // </UserProfileContext.Provider>
+
+    <Router>
       <ToolbarComponent />
-      {/* <ConnectionState />
-      <Events />
-      <ConnectionManager />
-      <MyForm /> */}
-      <section className="main-page-section  grid grid-rows-2">
-        {userProfile ? (
-          // eslint-disable-next-line react/no-unescaped-entities
-          <h3 className="text-white">
-            How's it going, {userProfile.firstName}?
-          </h3>
-        ) : (
-          <h3 className="text-white">Welcome! please log in</h3>
-        )}
-        <div className="flex gap-4 px-8">
-          <PostsListComponent />
-        </div>
-      </section>
+      <Routes>
+        <Route path="/" element={<HomePage userProfile={userProfile} />} />
+        <Route
+          path="/posts"
+          element={<PostsPage userProfile={userProfile} />}
+        />
+        {/* Add other routes here */}
+      </Routes>
       <PrivateMessagesComponent />
-    </UserProfileContext.Provider>
+    </Router>
   );
 }
 
