@@ -6,6 +6,7 @@ import "./App.css";
 import ToolbarComponent from "./app/components/navigation/ToolbarComponent";
 import { socket } from "./socket";
 import PrivateMessagesComponent from "./app/components/navigation/PrivateMessagesComponent";
+import PostsListComponent from "./app/components/PostsListComponent";
 // import ConnectionState from "./app/components/ConnectionState";
 // import Events from "./app/components/Events";
 // import ConnectionManager from "./app/components/ConnectionManager";
@@ -48,13 +49,19 @@ function App() {
       <Events />
       <ConnectionManager />
       <MyForm /> */}
-
-      {userProfile ? (
-        // eslint-disable-next-line react/no-unescaped-entities
-        <h3 className="text-white">How's it going, {userProfile.firstName}?</h3>
-      ) : (
-        <h3 className="text-white">Welcome! please log in</h3>
-      )}
+      <section className="main-page-section  grid grid-rows-2">
+        {userProfile ? (
+          // eslint-disable-next-line react/no-unescaped-entities
+          <h3 className="text-white">
+            How's it going, {userProfile.firstName}?
+          </h3>
+        ) : (
+          <h3 className="text-white">Welcome! please log in</h3>
+        )}
+        <div className="flex gap-4 px-8">
+          <PostsListComponent />
+        </div>
+      </section>
       <PrivateMessagesComponent />
     </UserProfileContext.Provider>
   );

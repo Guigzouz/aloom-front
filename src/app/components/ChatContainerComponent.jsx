@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 import { useCookies } from "react-cookie";
 import dayjs from "dayjs";
 
+// eslint-disable-next-line react/prop-types
 const ChatContainerComponent = ({ onSwitchComponent, friend }) => {
   const [messageInput, setMessageInput] = useState("");
   const [messages, setMessages] = useState([]);
@@ -29,6 +30,7 @@ const ChatContainerComponent = ({ onSwitchComponent, friend }) => {
   useEffect(() => {
     if (!userId) return; // Exit if userId is not defined
 
+    // eslint-disable-next-line react/prop-types
     const roomId = getRoomId(userId, friend.userInformations.id);
     socket.emit("joinRoom", { roomId });
 
@@ -45,12 +47,14 @@ const ChatContainerComponent = ({ onSwitchComponent, friend }) => {
     return () => {
       socket.off("receiveMessage");
     };
+    // eslint-disable-next-line react/prop-types
   }, [friend.userInformations.id, userId]);
 
   const handleSendMessage = (event) => {
     event.preventDefault();
     if (!userId || !messageInput.trim()) return; // Exit if userId is not defined or message is empty
 
+    // eslint-disable-next-line react/prop-types
     const roomId = getRoomId(userId, friend.userInformations.id);
     const timestamp = new Date();
     socket.emit("sendMessage", {
@@ -89,6 +93,7 @@ const ChatContainerComponent = ({ onSwitchComponent, friend }) => {
         <div className="flex items-center gap-2">
           <AccountCircleIcon sx={{ fontSize: 24, color: "white" }} />
           <span className="text-white">
+            {/* eslint-disable-next-line react/prop-types */}
             {friend.userInformations.firstName}
           </span>
           <div className="h-[15px] w-[15px] bg-aloom-orange rounded-full inline-block"></div>

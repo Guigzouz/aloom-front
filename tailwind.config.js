@@ -8,6 +8,7 @@ export default {
       "aloom-bg-dark": "#282828",
       "aloom-bg-dark-second": "#1E1E1E",
       "aloom-orange": "#FF521B",
+      "aloom-disabled-grey": "#808080",
     },
     extend: {
       backgroundImage: {
