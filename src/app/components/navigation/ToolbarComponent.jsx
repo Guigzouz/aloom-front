@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import SmsIcon from "@mui/icons-material/Sms";
 
 const ToolbarComponent = () => {
   const navigate = useNavigate();
@@ -18,6 +19,12 @@ const ToolbarComponent = () => {
               onClick={handleImageClick}
               style={{ cursor: "pointer" }} // Add a pointer cursor to indicate it's clickable
             />
+          </div>
+          <div>
+            <SmsIcon
+              sx={{ color: "white", fontSize: 38 }}
+              className="cursor-pointer"
+            ></SmsIcon>
           </div>
         </div>
       </section>

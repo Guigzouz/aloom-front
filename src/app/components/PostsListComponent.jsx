@@ -4,10 +4,20 @@ import { useCookies } from "react-cookie";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import MoodIcon from "@mui/icons-material/Mood";
+import CommentComponent from "./CommentComponent";
 
 const PostsListComponent = () => {
   const [cookies] = useCookies(["jwt_authorization"]);
   const [postsList, setPostsList] = useState([]);
+  const [isCommentModalVisible, setIsCommentModalVisible] = useState([]);
+
+  const handleComment = () => {
+    console.log("hey");
+    setIsCommentModalVisible(true);
+  };
+  const handleCommentClose = () => {
+    setIsCommentModalVisible(false);
+  };
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -30,6 +40,9 @@ const PostsListComponent = () => {
 
   return (
     <>
+      {isCommentModalVisible && (
+        <CommentComponent onClose={handleCommentClose}></CommentComponent>
+      )}
       <div className="post-list-container bg-aloom-bg-dark-second p-5 rounded-2xl flex flex-col justify-between w-1/2">
         <div className="max-h-[22rem] overflow-y-scroll">
           {postsList.length > 0 ? (
@@ -66,6 +79,8 @@ const PostsListComponent = () => {
                 <div className="interaction-container flex mt-2 gap-2">
                   <AddCommentIcon
                     sx={{ backgroundColor: "aloom-disabled-grey" }}
+                    className="cursor-pointer"
+                    onClick={handleComment}
                   ></AddCommentIcon>
                   <MoodIcon sx={{}}></MoodIcon>
                 </div>

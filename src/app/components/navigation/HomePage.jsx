@@ -1,7 +1,4 @@
-import React from "react";
 import PostsListComponent from "../PostsListComponent";
-import PrivateMessagesComponent from "./PrivateMessagesComponent";
-import ToolbarComponent from "./ToolbarComponent";
 
 const HomePage = ({ userProfile }) => {
   return (
@@ -11,7 +8,7 @@ const HomePage = ({ userProfile }) => {
       ) : (
         <h3 className="text-white">Welcome! Please log in</h3>
       )}
-      <div className="flex gap-4 px-8">
+      <div className="flex gap-4 px-8 justify-end">
         <PostsListComponent />
       </div>
     </section>
