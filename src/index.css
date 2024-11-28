@@ -25,20 +25,6 @@
 
 /* no options to custom the phone input so adding more css, not ideal but does the trick for now */
 /* https://react-international-phone.vercel.app/docs/getting-started */
-.aloom-react-international-phone-input {
-  .react-international-phone-country-selector-button {
-    border-radius: 10px 0px 0px 10px;
-    padding: 18px 15px;
-  }
-
-  .react-international-phone-input {
-    border-radius: 0px 10px 10px 0px;
-    padding: 18px 15px;
-    font-size: 14;
-    width: 325px;
-    color: #282828;
-  }
-}
 
 .diagonal-gradient {
   background: linear-gradient(-50deg, #ff521b, #c94016, #ff521b);

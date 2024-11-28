@@ -36,11 +36,6 @@ export const handleLoginEvent = async (input) => {
 };
 
 export const handleSignupEvent = async (input) => {
-  // Sanitize phone number
-  if (input.phoneNumber) {
-    input.phoneNumber = input.phoneNumber.replace(/\D/g, ""); // Remove non-numeric characters
-  }
-  console.log("in handle signup", input.phoneNumber);
   try {
     const response = await fetch(`${apiUrl}/auth`, {
       method: "POST",

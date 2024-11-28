@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import SmsIcon from "@mui/icons-material/Sms";
+import { Button } from "../../atoms";
 
 const ToolbarComponent = () => {
   const navigate = useNavigate();
 
   const handleImageClick = () => {
+    console.log("i go through imageclick handler");
     navigate("/");
   };
 
@@ -21,10 +22,12 @@ const ToolbarComponent = () => {
             />
           </div>
           <div>
-            <SmsIcon
-              sx={{ color: "white", fontSize: 38 }}
-              className="cursor-pointer"
-            ></SmsIcon>
+            <Button.IconButton
+              icon="BsFillChatSquareTextFill"
+              onClick={() => handleImageClick()}
+              size={32}
+              color="white"
+            />
           </div>
         </div>
       </section>

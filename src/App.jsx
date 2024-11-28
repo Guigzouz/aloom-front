@@ -4,12 +4,10 @@ import { jwtDecode } from "jwt-decode";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
-import ToolbarComponent from "./app/components/navigation/ToolbarComponent";
 import { socket } from "./socket";
-import PrivateMessagesComponent from "./app/components/navigation/PrivateMessagesComponent";
-import PostsListComponent from "./app/components/PostsListComponent";
-import HomePage from "./app/components/navigation/HomePage";
-import PostsPage from "./app/components/navigation/PostsPage";
+import { Toolbar } from "./app/components/organisms";
+import HomePage from "./app/pages/HomePage";
+import PostsPage from "./app/pages/PostsPage";
 // import ConnectionState from "./app/components/ConnectionState";
 // import Events from "./app/components/Events";
 // import ConnectionManager from "./app/components/ConnectionManager";
@@ -69,7 +67,7 @@ function App() {
     // </UserProfileContext.Provider>
 
     <Router>
-      <ToolbarComponent />
+      <Toolbar.ToolbarComponent />
       <Routes>
         <Route path="/" element={<HomePage userProfile={userProfile} />} />
         <Route
@@ -78,7 +76,7 @@ function App() {
         />
         {/* Add other routes here */}
       </Routes>
-      <PrivateMessagesComponent />
+      <Toolbar.PrivateMessagesComponent />
     </Router>
   );
 }

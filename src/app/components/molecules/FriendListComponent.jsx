@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useCookies } from "react-cookie";
 
-import { handleFriendListLoading } from "../data-access-layer/friends-access-object";
-import { handleUserRetrieveInformations } from "../data-access-layer/users-access-object";
+import { handleFriendListLoading } from "../../data-access-layer/friends-access-object";
+import { handleUserRetrieveInformations } from "../../data-access-layer/users-access-object";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 

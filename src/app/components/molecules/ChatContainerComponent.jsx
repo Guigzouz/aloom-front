@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import SendIcon from "@mui/icons-material/Send";
-import { socket } from "../../socket";
+import { socket } from "../../../socket";
 import { jwtDecode } from "jwt-decode";
 import { useCookies } from "react-cookie";
 import dayjs from "dayjs";
