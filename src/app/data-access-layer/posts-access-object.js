@@ -23,3 +23,27 @@ export const getPosts = async (token) => {
     throw error;
   }
 };
+
+export const createPost = async (postContent, token) => {
+  try {
+    const response = await fetch(`${apiUrl}/posts/create-post`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      mode: "cors",
+      body: JSON.stringify({ content: postContent }),
+    });
+
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};

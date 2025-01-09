@@ -1,9 +1,3 @@
-// auth-access-object.js
-
-import { Cookies } from "react-cookie";
-import { jwtDecode } from "jwt-decode";
-
-const cookies = new Cookies();
 const apiUrl = import.meta.env.VITE_API_URL;
 
 export const handleLoginEvent = async (input) => {
@@ -22,13 +16,9 @@ export const handleLoginEvent = async (input) => {
     }
 
     const data = await response.json();
-    const decodedJwt = jwtDecode(data.jwt);
 
-    cookies.set("jwt_authorization", data.jwt, {
-      expires: new Date(decodedJwt.exp * 1000),
-    });
-
-    return data; // Optionally return data if needed
+    // Return the data (including the JWT) to be handled by the Zustand store
+    return data;
   } catch (error) {
     console.error("Error:", error);
     throw error;

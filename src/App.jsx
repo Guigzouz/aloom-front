@@ -1,20 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import { socket } from "./socket";
-import { Toolbar } from "./app/components/organisms";
+import { Toolbar } from "./app/components/ui/organisms";
 import HomePage from "./app/pages/HomePage";
 import PostsPage from "./app/pages/PostsPage";
-// import ConnectionState from "./app/components/ConnectionState";
-// import Events from "./app/components/Events";
-// import ConnectionManager from "./app/components/ConnectionManager";
-// import MyForm from "./app/components/MyForm";
-
-// Create a context to store user profile data
-const UserProfileContext = React.createContext();
+import { Theme } from "@radix-ui/themes";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [cookies] = useCookies(["jwt_authorization"]);
@@ -44,28 +40,6 @@ function App() {
   }, [cookies.jwt_authorization]);
 
   return (
-    // <UserProfileContext.Provider value={userProfile}>
-    //   <ToolbarComponent />
-    //   {/* <ConnectionState />
-    //   <Events />
-    //   <ConnectionManager />
-    //   <MyForm /> */}
-    //   <section className="main-page-section  grid grid-rows-2">
-    //     {userProfile ? (
-    //       // eslint-disable-next-line react/no-unescaped-entities
-    //       <h3 className="text-white">
-    //         How's it going, {userProfile.firstName}?
-    //       </h3>
-    //     ) : (
-    //       <h3 className="text-white">Welcome! please log in</h3>
-    //     )}
-    //     <div className="flex gap-4 px-8">
-    //       <PostsListComponent />
-    //     </div>
-    //   </section>
-    //   <PrivateMessagesComponent />
-    // </UserProfileContext.Provider>
-
     <Router>
       <Toolbar.ToolbarComponent />
       <Routes>
@@ -77,6 +51,7 @@ function App() {
         {/* Add other routes here */}
       </Routes>
       <Toolbar.PrivateMessagesComponent />
+      <Toaster />
     </Router>
   );
 }
