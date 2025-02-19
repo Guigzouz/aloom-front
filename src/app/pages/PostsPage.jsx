@@ -3,7 +3,7 @@ import PostsListComponent from "../components/features/post/post-list/post-list-
 const PostsPage = () => {
   return (
     <section className="main-page-section flex px-8">
-      <PostsListComponent />
+      <PostsListComponent isReducedView={false} />
     </section>
   );
 };

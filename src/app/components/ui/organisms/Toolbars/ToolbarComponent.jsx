@@ -12,7 +12,7 @@ const ToolbarComponent = () => {
   return (
     <>
       <section className="aloom-main-toolbar bg-aloom-bg-dark-second h-full w-24 rounded-3xl">
-        <div className="flex flex-col items-center justify-between h-full p-5">
+        <div className="flex flex-col items-center h-full p-5">
           <div>
             <img
               src="src/assets/aloom-panda.png"
@@ -21,11 +21,33 @@ const ToolbarComponent = () => {
               style={{ cursor: "pointer" }} // Add a pointer cursor to indicate it's clickable
             />
           </div>
-          <div>
+          <div className="flex flex-col gap-5 pb-2 pt-5 items-center justify-center">
             <Button.IconButton
-              icon="BsFillChatSquareTextFill"
+              icon="BsPersonAdd"
+              iconOpposite="BsPersonFillAdd"
+              onClick={() => handleImageClick("/social")}
+              size={40}
+              color="white"
+            />
+            <Button.IconButton
+              icon="BsPeople"
+              iconOpposite="BsPeopleFill"
+              onClick={() => handleImageClick("/groups")}
+              size={36}
+              color="white"
+            />
+            <Button.IconButton
+              icon="BsGlobe2"
+              iconOpposite="BsGlobeEuropeAfrica"
               onClick={() => handleImageClick("/posts")}
-              size={32}
+              size={38}
+              color="white"
+            />
+            <Button.IconButton
+              icon="BsGear"
+              iconOpposite="BsGearFill"
+              onClick={() => handleImageClick("/settings")}
+              size={38}
               color="white"
             />
           </div>

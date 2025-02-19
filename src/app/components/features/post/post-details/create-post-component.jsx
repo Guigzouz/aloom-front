@@ -1,11 +1,12 @@
 import useFormInput from "../../../hooks/useFormInput";
-import { Button, Container, Typography } from "../../../ui/atoms";
+import { Button, Container } from "../../../ui/atoms";
 import toast from "react-hot-toast";
 import { Form } from "../../../ui/molecules";
 import { createPost } from "../../../../data-access-layer/posts-access-object";
 import useAuthStore from "../../../../store/authStore";
 
-const CreatePostComponent = ({ onClose }) => {
+// eslint-disable-next-line react/prop-types
+const CreatePostComponent = ({ onClose, displayCloseBtn, onPostCreated }) => {
   const { input, handleInputChange } = useFormInput({
     content: "",
   });
@@ -21,7 +22,9 @@ const CreatePostComponent = ({ onClose }) => {
 
       await createPost(input.content, jwt); // Pass the content and token
       toast.success("Post created successfully!");
-      onClose(); // Close the modal or perform other actions
+      if (onPostCreated) {
+        onPostCreated(); // Call the callback function
+      }
     } catch (error) {
       console.error("Error creating post:", error);
       toast.error(error.message || "An error occurred while creating the post");
@@ -33,23 +36,23 @@ const CreatePostComponent = ({ onClose }) => {
       name: "content",
       type: "textarea",
       id: "post-content",
-      placeholder: "Write your thoughts here ...",
+      placeholder: "What's up ?",
       isRequired: true,
+      submitButtonType: "icon",
       onChange: handleInputChange,
     },
   ];
 
   return (
-    <Container.Base className="flex p-5 flex-col rounded-2xl bg-aloom-bg-dark h-[28rem] w-[700px]">
-      <div className="justify-between w-full flex mb-5">
-        <Typography.Title className="text-white italic text-lg">
-          Write your thoughts
-        </Typography.Title>
-        <Button.IconButton
-          icon="BsXSquare"
-          iconOpposite="BsXSquareFill"
-          onClick={onClose}
-        />
+    <Container.Base className="mb-5 flex p-5 flex-col rounded-2xl bg-aloom-bg-dark h-[12rem] w-full">
+      <div className="justify-between w-full flex ">
+        {displayCloseBtn && (
+          <Button.IconButton
+            icon="BsXSquare"
+            iconOpposite="BsXSquareFill"
+            onClick={onClose}
+          />
+        )}
       </div>
       <Container.Form className="h-full">
         <Form.TextArea

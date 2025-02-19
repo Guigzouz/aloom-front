@@ -2,6 +2,7 @@ import { Container } from "../../atoms";
 import useFormInput from "../../../hooks/useFormInput";
 import useAuthStore from "../../../../store/authStore"; // Import Zustand store
 import { Form } from "../../molecules";
+import toast from "react-hot-toast";
 
 const LoginComponent = () => {
   const { input, handleInputChange } = useFormInput({
@@ -15,9 +16,13 @@ const LoginComponent = () => {
     e.preventDefault();
     try {
       console.log("Login input here:", input);
+
       await login(input); // Call the login method from the store
+      toast.success(`Welcome ${input.email}! `);
       // Optionally handle additional logic after successful login
     } catch (error) {
+      toast.error(error.message || "An error occurred while login in");
+
       console.error("Login error:", error); // Handle the error if needed
     }
   };

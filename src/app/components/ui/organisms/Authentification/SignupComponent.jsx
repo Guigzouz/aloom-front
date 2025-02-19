@@ -1,6 +1,7 @@
 import { useState } from "react";
 import useAuthStore from "../../../../store/authStore"; // Import the Zustand store
 import { Form } from "../../molecules";
+import toast from "react-hot-toast";
 
 const SignupComponent = () => {
   const [input, setInput] = useState({
@@ -26,8 +27,9 @@ const SignupComponent = () => {
     try {
       const data = await signup(input); // Call the signup method from the store
       console.log("Signup successful:", data); // Handle success if needed
+      toast.success("Signup successful!");
     } catch (error) {
-      console.error("Signup error:", error); // Handle error
+      toast.error(error.message || "An error occurred while signing up");
     }
   };
 

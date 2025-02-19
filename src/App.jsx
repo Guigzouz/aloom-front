@@ -9,8 +9,11 @@ import { socket } from "./socket";
 import { Toolbar } from "./app/components/ui/organisms";
 import HomePage from "./app/pages/HomePage";
 import PostsPage from "./app/pages/PostsPage";
-import { Theme } from "@radix-ui/themes";
 import { Toaster } from "react-hot-toast";
+import SettingsPage from "./app/pages/SettingsPage";
+import SocialPage from "./app/pages/SocialPage";
+import GroupsPage from "./app/pages/GroupsPage";
+import { ModalProvider } from "./app/providers/ModalProvider";
 
 function App() {
   const [cookies] = useCookies(["jwt_authorization"]);
@@ -40,19 +43,33 @@ function App() {
   }, [cookies.jwt_authorization]);
 
   return (
-    <Router>
-      <Toolbar.ToolbarComponent />
-      <Routes>
-        <Route path="/" element={<HomePage userProfile={userProfile} />} />
-        <Route
-          path="/posts"
-          element={<PostsPage userProfile={userProfile} />}
-        />
-        {/* Add other routes here */}
-      </Routes>
-      <Toolbar.PrivateMessagesComponent />
-      <Toaster />
-    </Router>
+    <ModalProvider>
+      <Router>
+        <Toolbar.ToolbarComponent />
+        <Routes>
+          <Route path="/" element={<HomePage userProfile={userProfile} />} />
+          <Route
+            path="/posts"
+            element={<PostsPage userProfile={userProfile} />}
+          />
+          <Route
+            path="/settings"
+            element={<SettingsPage userProfile={userProfile} />}
+          />
+          <Route
+            path="/social"
+            element={<SocialPage userProfile={userProfile} />}
+          />
+          <Route
+            path="/groups"
+            element={<GroupsPage userProfile={userProfile} />}
+          />
+          {/* Add other routes here */}
+        </Routes>
+        <Toolbar.PrivateMessagesComponent />
+        <Toaster />
+      </Router>
+    </ModalProvider>
   );
 }
 

@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import * as Icons from "react-icons/bs"; // Import Bootstrap icons
 
-const IconButton = ({
+// TODO : NEED TO ADD THE LOGIC WHERE IF IMAGE EXISTS DISPLAY IT
+const AvatarButton = ({
   icon,
   iconOpposite,
   onClick,
@@ -46,7 +47,7 @@ const IconButton = ({
   );
 };
 
-IconButton.propTypes = {
+AvatarButton.propTypes = {
   icon: PropTypes.string.isRequired, // Icon name as a string
   iconOpposite: PropTypes.string, // Opposite icon name as a string
   onClick: PropTypes.func.isRequired,
@@ -55,9 +56,9 @@ IconButton.propTypes = {
   color: PropTypes.string,
 };
 
-IconButton.defaultProps = {
+AvatarButton.defaultProps = {
   size: 36,
   color: "white",
 };
 
-export default IconButton;
+export default AvatarButton;
