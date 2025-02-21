@@ -10,6 +10,7 @@ import useAuthStore from "../../../../store/authStore";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import PostListItem from "../post-list-items/post-list-item";
+import { Interaction } from "../../../ui/organisms";
 
 // eslint-disable-next-line react/prop-types
 const CreateCommentComponent = ({
@@ -32,7 +33,9 @@ const CreateCommentComponent = ({
   const jwt = useAuthStore((state) => state.jwt); // Get the token from Zustand store
 
   const handleCreatePost = async (e) => {
-    e.preventDefault();
+    if (e && typeof e.preventDefault === "function") {
+      e.preventDefault();
+    }
     try {
       if (!jwt) {
         throw new Error("User is not authenticated");
@@ -92,6 +95,7 @@ const CreateCommentComponent = ({
       isRequired: true,
       submitButtonType: "icon",
       onChange: handleInputChange,
+      isImageUploadingAvailable: true,
     },
   ];
 
@@ -157,7 +161,7 @@ const CreateCommentComponent = ({
       </div>
 
       <Container.Form className="h-[140px]">
-        <Form.TextArea
+        <Interaction.FormTextArea
           configs={createPostConfigs}
           onSubmit={handleCreatePost}
         />

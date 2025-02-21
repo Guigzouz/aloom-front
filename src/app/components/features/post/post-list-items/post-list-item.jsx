@@ -96,7 +96,13 @@ const PostListItem = ({ postContent }) => {
         </div>
         <div className="flex gap-5 items-center">
           <span>{postContent.userReactionsCount}</span>
-          <Dropdown.Menu userId={"test"} />
+          {/* <Dropdown.Menu userId={"test"} /> */}
+          <Button.IconButton
+            icon="BsHeart"
+            iconOpposite="BsFillHeart"
+            onClick={handleButtonClick} // Prevent modal toggle when clicking the chat button
+            size={26}
+          />
         </div>
         <div className="flex gap-5 items-center">
           <span>NaN</span>

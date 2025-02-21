@@ -8,14 +8,22 @@ const FormTextArea = ({ configs, onSubmit }) => {
   };
 
   return (
-    <Container.Form className="h-full">
-      <form
-        onSubmit={handleFormSubmit}
-        className="flex h-full flex-col gap-2 items-center relative"
-      >
+    <Container.Form className="flex h-full flex-col gap-2 relative">
+      {configs.map((config, i) => (
+        <div key={i} className="absolute w-full h-full">
+          {config.isImageUploadingAvailable && (
+            <Button.IconButton
+              icon="BsImage"
+              iconOpposite="BsImage"
+              type="submit"
+              className="absolute bottom-3 left-3 z-10 text-white"
+            />
+          )}
+        </div>
+      ))}
+      <form onSubmit={handleFormSubmit} className="">
         {configs.map((config, i) => (
-          <div key={i} className="relative w-full h-full">
-            {/* Send Button Inside Textarea */}
+          <div key={i} className="absolute w-full h-full">
             {config.submitButtonType === "icon" && (
               <Button.IconButton
                 icon="BsSend"
