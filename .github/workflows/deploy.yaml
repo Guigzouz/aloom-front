@@ -1,4 +1,4 @@
-name: Deploy Front-End
+name: CI / CD for aloom-frontend
 
 on:
   push:
@@ -6,27 +6,52 @@ on:
       - main
 
 jobs:
-  deploy:
+  build_and_publish:
     runs-on: ubuntu-latest
-
     steps:
-      # Checkout the code
-      - name: Checkout Code
+      - uses: actions/checkout@v3
+
+      # Log in to GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        run: |
+          docker login --username guigzougz --password ${{ secrets.GH_PAT }} ghcr.io
+
+      # Build the front-end Docker image
+      - name: Build and push the Frontend image
+        run: |
+          docker build . -f Dockerfile --tag ghcr.io/guigzouz/aloom-front-end:latest
+          docker push ghcr.io/guigzouz/aloom-front-end:latest
+
+  deploy_to_vps:
+    needs: build_and_publish
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Set up SSH
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.5.3
+      # Log in to the Droplet and deploy using Docker Compose
+      - name: Deploy to Droplet using Docker Compose
+        uses: appleboy/ssh-action@v0.1.9
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            # Log in to GHCR on the Droplet
+            echo ${{ secrets.GH_PAT }} | docker login ghcr.io -u guigzougz --password-stdin
 
-      # Install Dependencies and Build
-      - name: Install Dependencies
-        run: |
-          npm install
-          npm run build
+            # Pull the latest front-end image
+            docker pull ghcr.io/guigzouz/aloom-front-end:latest
 
-      # Deploy Front-End to Droplet
-      - name: Deploy Front-End
-        run: |
-          scp -r dist/* ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_IP }}:/var/www/html/
+            # Stop and remove any old containers (optional, based on your needs)
+            cd /root/aloom-front
+
+            # Fetch the latest code (in case any updates were made)
+            git pull origin main
+
+            # Rebuild and deploy using Docker Compose
+            docker-compose down
+            docker-compose up -d
+
+            # Optional: Clean up unused images
+            docker image prune -f

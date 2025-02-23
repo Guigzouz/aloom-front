@@ -14,6 +14,7 @@ import SettingsPage from "./app/pages/SettingsPage";
 import SocialPage from "./app/pages/SocialPage";
 import GroupsPage from "./app/pages/GroupsPage";
 import { ModalProvider } from "./app/providers/ModalProvider";
+import SearchTemplatePage from "./app/components/features/videogames/videogames-searchtemplate/videogames-searchtemplate";
 
 function App() {
   const [cookies] = useCookies(["jwt_authorization"]);
@@ -47,6 +48,14 @@ function App() {
       <Router>
         <Toolbar.ToolbarComponent />
         <Routes>
+          <Route
+            path="/social/:gameId/group"
+            element={<SearchTemplatePage type="group" />}
+          />
+          <Route
+            path="/social/:gameId/single"
+            element={<SearchTemplatePage type="single" />}
+          />
           <Route path="/" element={<HomePage userProfile={userProfile} />} />
           <Route
             path="/posts"
