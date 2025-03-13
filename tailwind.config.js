@@ -12,8 +12,8 @@ export default {
     },
     extend: {
       backgroundImage: {
-        "lol-jhin": "url('src/assets/jhin_0.jpg')",
-        "elden-ring": "url('src/assets/elden-ring.avif')",
+        "lol-jhin": "url('/assets/jhin_0.jpg')",
+        "elden-ring": "url('/assets/elden-ring.avif')",
       },
     },
   },

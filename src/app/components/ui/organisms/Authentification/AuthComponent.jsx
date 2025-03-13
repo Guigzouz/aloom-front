@@ -45,7 +45,7 @@ const AuthComponent = ({ onClose }) => {
           />
         </div>
         <div className="flex justify-center">
-          <img src="src/assets/aloom-logo-text.png" alt="Aloom Logo" />
+          <img src="/assets/aloom-logo-text.png" alt="Aloom Logo" />
         </div>
 
         {/* Check if the user is logged in */}

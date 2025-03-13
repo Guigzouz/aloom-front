@@ -77,7 +77,7 @@ const FormTextArea = ({ configs, onSubmit }) => {
                   </div>
                 ))
               ) : (
-                <p className="text-gray-500 z-99">No images uploaded</p>
+                <p className="text-gray-500 z-99"></p>
               )}
             </div>
           </div>

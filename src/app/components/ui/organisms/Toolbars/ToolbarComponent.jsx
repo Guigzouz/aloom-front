@@ -15,7 +15,7 @@ const ToolbarComponent = () => {
         <div className="flex flex-col items-center h-full p-5">
           <div>
             <img
-              src="src/assets/aloom-panda.png"
+              src="/assets/aloom-panda.png"
               alt="Panda"
               onClick={() => handleImageClick("/")}
               style={{ cursor: "pointer" }} // Add a pointer cursor to indicate it's clickable
